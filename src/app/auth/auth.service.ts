@@ -11,6 +11,7 @@ import { JwtTokenResponse } from './jwt-response';
   providedIn: 'root'
 })
 export class AuthService {
+  
   private url='http://localhost:8080/api/auth/';
   constructor(private httpClient:HttpClient,private localStorageService:LocalStorageService) { }
 
@@ -28,6 +29,11 @@ export class AuthService {
 
   isAuthenticated():boolean{
     return this.localStorageService.retrieve('username')!=null;
+  }
+
+  logout() {
+    this.localStorageService.clear('authenticationToken');
+    this.localStorageService.clear('username');
   }
 
 }
